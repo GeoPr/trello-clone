@@ -1,0 +1,29 @@
+.board {
+  margin: 15px;
+  flex: 1 0 calc(33.333% - 30px);
+  // .board__body
+  &__body {
+    padding: 20px;
+    border-radius: 10px;
+    background: #eee;
+    color: #000;
+    display: grid;
+    row-gap: 15px;
+    grid-template: auto auto 1fr / auto;
+    position: relative;
+  }
+  // .board__icon
+  &__icon {
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: -15px;
+    font-size: 4rem;
+    color: red;
+  }
+  // .board__title
+  &__title {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+}

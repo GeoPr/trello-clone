@@ -1,0 +1,9 @@
+.boards-form {
+  display: grid;
+  grid-template: 1fr / 8fr 2fr;
+	column-gap: 30px;
+	margin: 0px 0px 50px 0px;
+	input {
+		color: #fff;
+	}
+}

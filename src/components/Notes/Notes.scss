@@ -1,0 +1,8 @@
+.board {
+  // .board__notes
+  &__notes {
+    display: grid;
+		row-gap: 10px;
+		align-content: start;
+  }
+}
