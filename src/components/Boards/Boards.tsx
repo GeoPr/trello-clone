@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Board } from '../Board/Board';
 import { TApp } from '../../redux/store';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import './Boards.scss';
 import { moveNote } from '../../redux/reducers/boardsReducer/actions';
+import './Boards.scss';
 
 export const Boards = () => {
   const boards = useSelector((s: TApp) => s.boards);
@@ -21,8 +21,13 @@ export const Boards = () => {
       <div className="boards">
         {boards.map(board => (
           <Droppable droppableId={board.id + ''} key={board.id}>
-            {provided => (
-              <Board board={board} key={board.id} provided={provided} />
+            {(provided, snapshot) => (
+              <Board
+                board={board}
+                key={board.id}
+                provided={provided}
+                snapshot={snapshot}
+              />
             )}
           </Droppable>
         ))}

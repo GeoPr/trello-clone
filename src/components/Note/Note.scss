@@ -1,12 +1,11 @@
 .notes {
   // .notes__note
   &__note {
-		background: #333;
-		padding: 10px;
-		border-radius: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     &._completed .note__title::before {
       width: 100%;
     }
@@ -15,23 +14,48 @@
 .note {
   // .note__box
   &__box {
-		display: flex;
-		align-items: center;
+    display: flex;
+    align-items: center;
   }
   // .note__title
   &__title {
-		color: #fff;
-		position: relative;
-		display: flex;
-		align-items: center;
-		&::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			width: 0;
-			height: 3px;
-			background: red;
-			transition: all 0.5s ease 0s;
-		}
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    max-width: 500px;
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: red;
+      transition: all 0.5s ease 0s;
+    }
+  }
+  // .note__title-text
+  &__title-text {
+    padding: 5px;
+    background: transparent;
+    transition: all 0.5s ease 0s;
+    &:focus {
+      background: rgba($color: #eee, $alpha: 0.2);
+    }
+  }
+  // .note__title-label
+  &__title-label {
+    position: absolute;
+    left: 0;
+    top: -17px;
+    width: 100%;
+    font-size: 13px;
+    color: gray;
+    display: block;
   }
 }

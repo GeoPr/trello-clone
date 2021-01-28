@@ -15,13 +15,15 @@ export const Notes: FC<IProps> = ({ notes, boardId }) => {
       {notes.map((note, index) => (
         <Draggable key={note.id} index={index} draggableId={note.id + ''}>
           {(provided, snapshot) => (
-            <Note
-              note={note}
-              boardId={boardId}
-              key={note.id}
-              provided={provided}
-              snapshot={snapshot}
-            />
+            <>
+              <Note
+                note={note}
+                boardId={boardId}
+                key={note.id}
+                provided={provided}
+                snapshot={snapshot}
+              />
+            </>
           )}
         </Draggable>
       ))}

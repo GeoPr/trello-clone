@@ -4,7 +4,9 @@ import {
   MOVE_NOTE,
   REMOVE_BOARD,
   REMOVE_NOTE,
+  SET_NOTE_EDITABLE,
   TOGGLE_NOTE,
+  EDIT_NOTE,
 } from './actionsTypes';
 import { TActions } from './../../store';
 import * as actions from './actions';
@@ -13,6 +15,7 @@ export interface INote {
   id: number;
   title: string;
   isCompleted: boolean;
+  isEditable: boolean;
 }
 
 export interface IBoard {
@@ -24,7 +27,9 @@ export interface IBoard {
 type TInitalState = Array<IBoard>;
 type TAction = TActions<typeof actions>;
 
-const initalState: TInitalState = [];
+const initalState: TInitalState = JSON.parse(
+  localStorage.getItem('boards') ?? '[]',
+);
 
 export const boardsReducer = (
   state: TInitalState = initalState,
@@ -53,7 +58,10 @@ export const boardsReducer = (
 
           return {
             ...board,
-            notes: [...board.notes, { title, id, isCompleted: false }],
+            notes: [
+              ...board.notes,
+              { title, id, isCompleted: false, isEditable: false },
+            ],
           };
         }
 
@@ -82,7 +90,7 @@ export const boardsReducer = (
 
       return state.map(board => {
         if (board.id === boardId) {
-          const changedBoardNotes = board.notes.map(note => {
+          const updatedNotes = board.notes.map(note => {
             if (note.id === noteId) {
               return { ...note, isCompleted: !note.isCompleted };
             }
@@ -90,7 +98,47 @@ export const boardsReducer = (
             return note;
           });
 
-          return { ...board, notes: changedBoardNotes };
+          return { ...board, notes: updatedNotes };
+        }
+
+        return board;
+      });
+    }
+
+    case SET_NOTE_EDITABLE: {
+      const { boardId, noteId, onlyFalse } = action.payload;
+
+      return state.map(board => {
+        if (board.id === boardId) {
+          const updatedNotes = board.notes.map(note => {
+            if (note.id === noteId) {
+              note.isEditable = onlyFalse ? false : !note.isEditable;
+            }
+
+            return note;
+          });
+
+          board.notes = updatedNotes;
+        }
+
+        return board;
+      });
+    }
+
+    case EDIT_NOTE: {
+      const { boardId, noteId, newTitle } = action.payload;
+
+      return state.map(board => {
+        if (board.id === boardId) {
+          const updatedNotes = board.notes.map(note => {
+            if (note.id === noteId) {
+              note.title = newTitle;
+            }
+
+            return note;
+          });
+
+          board.notes = updatedNotes;
         }
 
         return board;

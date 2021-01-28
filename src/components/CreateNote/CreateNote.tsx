@@ -30,6 +30,7 @@ export const CreateNote: FC<{ boardId: number }> = ({ boardId }) => {
         autoComplete="off"
         value={noteTitle}
         onChange={onChange}
+        label="New note"
       />
       <Button type="submit" color="primary" variant="contained">
         Create

@@ -4,7 +4,9 @@ import {
 	MOVE_NOTE,
   REMOVE_BOARD,
   REMOVE_NOTE,
-  TOGGLE_NOTE,
+	TOGGLE_NOTE,
+	EDIT_NOTE,
+	SET_NOTE_EDITABLE
 } from './actionsTypes';
 import { DraggableLocation } from 'react-beautiful-dnd';
 
@@ -36,4 +38,14 @@ export const toggleNote = (noteId: number, boardId: number) => ({
 export const moveNote = (source: DraggableLocation, destination: DraggableLocation) => ({
 	type: MOVE_NOTE,
 	payload: { source, destination }
+} as const);
+
+export const setNoteEditable = (boardId: number, noteId: number, onlyFalse: boolean = false) => ({
+	type: SET_NOTE_EDITABLE,
+	payload: { boardId, noteId, onlyFalse }
+} as const);
+
+export const editNote = (boardId: number, noteId: number, newTitle: string) => ({
+	type: EDIT_NOTE,
+	payload: { boardId, noteId, newTitle }
 } as const);
